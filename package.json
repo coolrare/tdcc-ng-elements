@@ -7,7 +7,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall:bak": "",
+    "postinstall": "ngcc",
+    "build:externals": "ng build --extra-webpack-config webpack.externals.js --prod --single-bundle",
+    "build:demo1:externals": "ng build --extra-webpack-config webpack.externals.js --prod --project demo1 --single-bundle"
   },
   "private": true,
   "dependencies": {
