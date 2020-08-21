@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { createCustomElement, NgElementConfig } from '@angular/elements';
 
 import { AppComponent } from './app.component';
 
@@ -8,9 +10,16 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: []
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {}
+
+  ngDoBootstrap(app): void {
+    const customElement = createCustomElement(AppComponent,  { injector: this.injector } as NgElementConfig);
+    customElements.define('tdcc-good', customElement);
+  }
+}
